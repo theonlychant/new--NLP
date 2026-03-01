@@ -22,3 +22,27 @@ model.bin
 .vscode/
 *.swp
 .DS_Store
+
+# Rust
+rust_module/target/
+**/target/
+
+# Python extras
+.pytest_cache/
+venv/
+env/
+env.bak/
+*.egg-info/
+dist/
+build/
+
+# OneDrive / sync artifacts
+~$*
+
+# Secrets and env
+.env
+.env.local
+.env.*.local
+
+# IDEs
+.idea/
