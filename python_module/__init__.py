@@ -10,6 +10,6 @@ This package provides:
 It delegates to `rust_wrapper` which locates the shared library (or falls
 back to C stubs when available).
 """
-from .rust_wrapper import compute, analyze, tokenize_json
+from .rust_wrapper import compute, analyze, tokenize_json, embed, batch_embed
 
-__all__ = ["compute", "analyze", "tokenize_json"]
+__all__ = ["compute", "analyze", "tokenize_json", "embed", "batch_embed"]
