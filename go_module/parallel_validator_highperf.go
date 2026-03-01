@@ -12,33 +12,33 @@ import (
 )
 
 // Reference integrity status
-type RefIntegrityStatus int
+type RefIntegrityStatusHP int
 
 const (
-	Valid RefIntegrityStatus = iota
-	IdentityChanged
-	IdentitySplit
-	IdentityMerged
-	Invalidated
-	Unresolved
-	ObserverRelative
+	HPValid RefIntegrityStatusHP = iota
+	HPIdentityChanged
+	HPIdentitySplit
+	HPIdentityMerged
+	HPInvalidated
+	HPUnresolved
+	HPObserverRelative
 )
 
-func (s RefIntegrityStatus) String() string {
+func (s RefIntegrityStatusHP) String() string {
 	switch s {
-	case Valid:
+	case HPValid:
 		return "Valid"
-	case IdentityChanged:
+	case HPIdentityChanged:
 		return "IdentityChanged"
-	case IdentitySplit:
+	case HPIdentitySplit:
 		return "IdentitySplit"
-	case IdentityMerged:
+	case HPIdentityMerged:
 		return "IdentityMerged"
-	case Invalidated:
+	case HPInvalidated:
 		return "Invalidated"
-	case Unresolved:
+	case HPUnresolved:
 		return "Unresolved"
-	case ObserverRelative:
+	case HPObserverRelative:
 		return "ObserverRelative"
 	default:
 		return "Unknown"
@@ -53,57 +53,57 @@ type Entity struct {
 	Layer   int
 }
 
-type Reference struct {
+type ReferenceHP struct {
 	ID             int
 	SourceID       int
 	TargetID       int
-	Status         RefIntegrityStatus
+	Status         RefIntegrityStatusHP
 	CandidateIDs   []int
 	LastValidated  int64 // unix timestamp
 }
 
 // Validator engine
-func validateReference(ref *Reference, entities map[int]*Entity, splitMap map[int][]int, wg *sync.WaitGroup) {
+func validateReferenceHP(ref *ReferenceHP, entities map[int]*Entity, splitMap map[int][]int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	target, ok := entities[ref.TargetID]
 	if !ok {
-		ref.Status = Invalidated
+		ref.Status = HPInvalidated
 		return
 	}
 	switch target.State {
 	case "Split":
-		ref.Status = Unresolved
+		ref.Status = HPUnresolved
 		ref.CandidateIDs = splitMap[target.ID]
 	case "Merged":
-		ref.Status = IdentityMerged
+		ref.Status = HPIdentityMerged
 	case "ObserverRelative":
-		ref.Status = ObserverRelative
+		ref.Status = HPObserverRelative
 	case "Collapsed":
-		ref.Status = Invalidated
+		ref.Status = HPInvalidated
 	case "Defined":
-		ref.Status = Valid
+		ref.Status = HPValid
 	default:
-		ref.Status = IdentityChanged
+		ref.Status = HPIdentityChanged
 	}
 	atomic.StoreInt64(&ref.LastValidated, time.Now().UnixNano())
 }
 
 // Parallel validator
-func parallelValidate(references []*Reference, entities map[int]*Entity, splitMap map[int][]int) {
+func parallelValidateHP(references []*ReferenceHP, entities map[int]*Entity, splitMap map[int][]int) {
 	var wg sync.WaitGroup
 	for _, ref := range references {
 		wg.Add(1)
-		go validateReference(ref, entities, splitMap, &wg)
+		go validateReferenceHP(ref, entities, splitMap, &wg)
 	}
 	wg.Wait()
 }
 
 // Leak check: ensure all references are accounted for
-func leakCheck(references []*Reference) {
+func leakCheckHP(references []*ReferenceHP) {
 	fmt.Printf("[LeakCheck] References: %d\n", len(references))
 }
 
-func main() {
+func ValidatorHPDemo() {
 	// Entities
 	entities := map[int]*Entity{
 		1: {ID: 1, Name: "the man", State: "Defined", Layer: 0},
@@ -116,7 +116,7 @@ func main() {
 		1: {3, 4},
 	}
 	// References
-	references := []*Reference{
+	references := []*ReferenceHP{
 		{ID: 1, SourceID: 2, TargetID: 1},
 	}
 	fmt.Println("Before validation:")
@@ -125,7 +125,7 @@ func main() {
 	}
 	// Simulate split
 	entities[1].State = "Split"
-	parallelValidate(references, entities, splitMap)
+	parallelValidateHP(references, entities, splitMap)
 	fmt.Println("\nAfter validation:")
 	for _, ref := range references {
 		fmt.Printf("Reference[%d]: %d -> %d | Status: %s", ref.ID, ref.SourceID, ref.TargetID, ref.Status)
@@ -137,5 +137,5 @@ func main() {
 		}
 		fmt.Println()
 	}
-	leakCheck(references)
+	leakCheckHP(references)
 }

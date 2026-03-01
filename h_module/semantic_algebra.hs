@@ -4,7 +4,7 @@
 -- Author: 1proprogrammerchant
 -- This is a stub for a functional language like Haskell or a symbolic algebra system.
 
-module SemanticAlgebra where
+module Main where
 
 -- Symbolic meaning transformation types
 data Meaning = Truth | Falsehood | Metaphor | Abstraction | Null deriving (Show, Eq)

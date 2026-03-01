@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+python_nlp/dist/
+python_nlp/*.egg-info/
+
+# Node
+node_modules/
+js_module/node_modules/
+package-lock.json
+
+# Build artifacts / binaries
+*.so
+*.dll
+*.dylib
+*.bin
+model.bin
+*.o
+
+# IDE / OS
+.vscode/
+*.swp
+.DS_Store

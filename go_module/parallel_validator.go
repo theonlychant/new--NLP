@@ -1,6 +1,7 @@
 // Go Parallel Reference Validator (minimal prototype)
 // Role: Concurrent referential integrity validation
 package main
+
 import (
 	"fmt"
 	"sync"
@@ -24,7 +25,7 @@ func validateReference(ref *Reference, entityStates map[int]string, wg *sync.Wai
 	}
 }
 
-func main() {
+func ValidatorDemo() {
 	entityStates := map[int]string{1: "Defined", 2: "Defined", 3: "Split"}
 	references := []Reference{{2, 1, ""}, {2, 3, ""}}
 	var wg sync.WaitGroup

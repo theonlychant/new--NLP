@@ -1,0 +1,12 @@
+{
+  "name": "js_module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "jest --colors",
+    "test:node": "node run_node_tests.js"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}

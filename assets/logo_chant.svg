@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="chant logo">
+  <defs>
+    <!-- Animated gradient for vibrant color shifts -->
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FFD166">
+        <animate attributeName="stop-color" values="#FFD166;#6EE7B7;#7C3AED;#FFD166" dur="6s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="60%" stop-color="#EF476F">
+        <animate attributeName="stop-color" values="#EF476F;#3B82F6;#6EE7B7;#EF476F" dur="6s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#118AB2">
+        <animate attributeName="stop-color" values="#118AB2;#7C3AED;#3B82F6;#118AB2" dur="6s" repeatCount="indefinite" />
+      </stop>
+    </linearGradient>
+
+    <!-- Toon-style filter: subtle blur + contrast + posterize-ish component transfer -->
+    <filter id="toon" x="-30%" y="-30%" width="160%" height="160%">
+      <!-- soft shadow/outlines -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur" />
+      <feComposite in="blur" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="edge" />
+      <!-- boost contrast -->
+      <feComponentTransfer in="SourceGraphic" result="col">
+        <feFuncR type="gamma" amplitude="1.2" exponent="0.9" offset="0"/>
+        <feFuncG type="gamma" amplitude="1.2" exponent="0.9" offset="0"/>
+        <feFuncB type="gamma" amplitude="1.2" exponent="0.9" offset="0"/>
+      </feComponentTransfer>
+      <!-- combine with edge to create cel-outline look -->
+      <feComposite in="col" in2="edge" operator="over" result="final" />
+      <feBlend in="final" in2="SourceGraphic" mode="normal"/>
+    </filter>
+
+    <!-- subtle paper grain for toon texture -->
+    <filter id="grain">
+      <feTurbulence baseFrequency="0.8" numOctaves="1" stitchTiles="stitch" result="noise" />
+      <feColorMatrix type="saturate" values="0" in="noise" result="mono" />
+      <feBlend in="SourceGraphic" in2="mono" mode="overlay" />
+    </filter>
+
+    <!-- medieval-style font fallback stack (use local or system fonts) -->
+    <style type="text/css"><![CDATA[
+      @font-face { font-family: 'CinzelDecor'; src: local('Cinzel Decorative'), local('Uncial Antiqua'); }
+      .medieval { font-family: 'CinzelDecor', 'Uncial Antiqua', 'Gothic A1', serif; font-weight:700; letter-spacing:2px; }
+    ]]></style>
+  </defs>
+
+  <!-- Background rounded square with animated lift -->
+  <rect x="64" y="64" width="896" height="896" rx="160" fill="url(#g)" filter="url(#toon)" transform="translate(0,0)">
+    <animateTransform attributeName="transform" type="translate" values="0 6; 0 -6; 0 6" dur="4s" repeatCount="indefinite" />
+  </rect>
+
+  <!-- stylized 'c' as a thick, medieval ring with stroke and animation -->
+  <g id="ring" transform="translate(220, 300) scale(1)" filter="url(#grain)">
+    <path id="cpath" d="M300 150 A150 150 0 1 1 150 0" fill="none" stroke="#FFF9EA" stroke-opacity="0.98" stroke-width="84" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- rotate slowly for a dynamic emblem -->
+    <animateTransform xlink:href="#ring" attributeName="transform" type="rotate" from="0 300 150" to="360 300 150" dur="18s" repeatCount="indefinite" />
+    <!-- subtle dash movement for toon-lining -->
+    <animate xlink:href="#cpath" attributeName="stroke-dasharray" values="0 480; 120 360; 0 480" dur="6s" repeatCount="indefinite" />
+  </g>
+
+  <!-- 'hant' text to the right of the 'c' styled in a medieval display font with toon effect -->
+  <g id="letters" transform="translate(420, 570)" filter="url(#toon)">
+    <text id="h" class="medieval" x="0" y="0" font-size="220" fill="white" stroke="#2B2B2B" stroke-width="6">h</text>
+    <text id="a" class="medieval" x="110" y="0" font-size="220" fill="white" stroke="#2B2B2B" stroke-width="6">a</text>
+    <text id="n" class="medieval" x="220" y="0" font-size="220" fill="white" stroke="#2B2B2B" stroke-width="6">n</text>
+    <text id="t" class="medieval" x="330" y="0" font-size="220" fill="white" stroke="#2B2B2B" stroke-width="6">t</text>
+
+    <!-- bounce animation per-letter with slight phase offsets -->
+    <animateTransform xlink:href="#h" attributeName="transform" type="translate" values="0 0; 0 -12; 0 0" dur="1.6s" repeatCount="indefinite" begin="0s" />
+    <animateTransform xlink:href="#a" attributeName="transform" type="translate" values="0 0; 0 -10; 0 0" dur="1.6s" repeatCount="indefinite" begin="0.12s" />
+    <animateTransform xlink:href="#n" attributeName="transform" type="translate" values="0 0; 0 -8; 0 0" dur="1.6s" repeatCount="indefinite" begin="0.24s" />
+    <animateTransform xlink:href="#t" attributeName="transform" type="translate" values="0 0; 0 -6; 0 0" dur="1.6s" repeatCount="indefinite" begin="0.36s" />
+
+    <!-- subtle color flash to accent strokes -->
+    <animate xlink:href="#h" attributeName="fill" values="#FFF9EA;#F6E05E;#FFF9EA" dur="3s" repeatCount="indefinite" />
+    <animate xlink:href="#a" attributeName="fill" values="#FFF9EA;#FBD38D;#FFF9EA" dur="3s" repeatCount="indefinite" begin="0.1s" />
+    <animate xlink:href="#n" attributeName="fill" values="#FFF9EA;#FDE68A;#FFF9EA" dur="3s" repeatCount="indefinite" begin="0.2s" />
+    <animate xlink:href="#t" attributeName="fill" values="#FFF9EA;#FAF089;#FFF9EA" dur="3s" repeatCount="indefinite" begin="0.3s" />
+  </g>
+
+  <!-- small-branding text (static) -->
+  <text x="72" y="980" class="medieval" font-size="28" fill="rgba(255,255,255,0.95)">chant</text>
+</svg>
