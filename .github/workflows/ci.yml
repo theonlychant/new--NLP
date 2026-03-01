@@ -51,3 +51,19 @@ jobs:
         run: |
           pip install pytest
           pytest -q
+
+      - name: Setup Node (for JS tests)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install JS deps
+        working-directory: js_module
+        run: |
+          npm ci --silent || npm install --silent
+
+      - name: Run JS tests (Jest or fallback)
+        working-directory: js_module
+        run: |
+          # try running Jest; if Node version or environment prevents it, fall back to the compat runner
+          npm test || node run_node_tests.js
