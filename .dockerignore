@@ -1,0 +1,26 @@
+# Ignore VCS
+.git
+
+# Node
+node_modules
+js_module/node_modules
+
+# Python envs / caches
+__pycache__
+*.pyc
+.venv
+venv
+
+# Rust target
+rust_module/target
+
+# Build artifacts
+dist
+build
+
+# Large IDE folders
+.vscode
+.idea
+
+# OneDrive / OS
+~$*
