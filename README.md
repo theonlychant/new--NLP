@@ -3,14 +3,13 @@
 This project provides a template for building an NLP system for bots using Python, C++, C, C#, Go, and JavaScript, with data analysis and Triton Inference Server deployment support.
 
 ## Structure
-- `python_nlp/` — Core NLP logic and data analysis (Python)
-- `cpp_module/` — C++ integration sample
-- `c_module/` — C integration sample
-- `csharp_module/` — C# integration sample
-- `go_module/` — Go integration sample
-- `js_module/` — JavaScript integration sample
-- `triton_deploy/` — Scripts/config for NVIDIA Triton Inference Server
-- `.github/` — Copilot and project instructions
+- `python_nlp/` - Core NLP logic and data analysis (Python)
+- `cpp_module/` - C++ integration sample
+- `c_module/` - C integration sample
+- `csharp_module/` - C# integration sample
+- `go_module/` - Go integration sample
+- `js_module/` - JavaScript integration sample
+- `triton_deploy/` - Scripts/config for NVIDIA Triton Inference Server
 
 ## Getting Started
 1. Implement your NLP logic in `python_nlp/` (see sample provided).
@@ -25,7 +24,3 @@ This project provides a template for building an NLP system for bots using Pytho
 - Node.js 16+
 - .NET 6+
 - NVIDIA Triton Inference Server (for deployment)
-
-## Notes
-- Replace sample code with your own logic as needed.
-- For H/H++: Please clarify if you meant a specific language or framework.
