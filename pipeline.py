@@ -17,12 +17,12 @@ class NLPPipeline:
     
     def execute(self, text: str) -> Dict[str, Any]:
         """Execute the full NLP pipeline"""
-        print(f"\n🚀 Starting NLP Pipeline with {len(self.pipeline_order)} modules\n")
+        print(f"\n Starting NLP Pipeline with {len(self.pipeline_order)} modules\n")
         print("=" * 70)
         
         for i, module_name in enumerate(self.pipeline_order, 1):
             module_config = self.modules[module_name]
-            print(f"\n[{i}/{len(self.pipeline_order)}] 📦 Executing: {module_name}")
+            print(f"\n[{i}/{len(self.pipeline_order)}] Executing: {module_name}")
             print(f"    Language: {module_config['language'].value.upper()}")
             print(f"    Performance Tier: {module_config['tier'].value}")
             print(f"    Description: {module_config['description']}")
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     test_text = "Apple and Google are competing. Microsoft released Azure today."
     results = pipeline.execute(test_text)
     
-    print("\n📊 FINAL RESULTS:")
+    print("\n FINAL RESULTS:")
     print("=" * 70)
     print(json.dumps(results, indent=2))
     print("=" * 70)
