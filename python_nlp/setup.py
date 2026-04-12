@@ -6,7 +6,7 @@ setup(
     description="Core NLP utilities for Python.",
     author="Your Name",
     author_email="your@email.com",
-    url="https://github.com/1proprogrammerchant/new--NLP",
+    url="https://github.com/theonlychant/new--NLP",
     packages=find_packages(),
     python_requires=">=3.7",
     license="MIT",
