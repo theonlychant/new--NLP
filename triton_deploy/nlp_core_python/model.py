@@ -1,5 +1,5 @@
 # Triton Python Backend for NLP Core
-# Author: 1proprogrammerchant
+# Author: theonlychant
 import json
 import numpy as np
 import triton_python_backend_utils as pb_utils
