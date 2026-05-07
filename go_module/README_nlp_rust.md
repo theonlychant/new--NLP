@@ -2,9 +2,9 @@ Rust test artifacts in go_module
 
 These files are examples and placeholders placed directly in `go_module` for testing:
 
-- `nlp.rs` — simple Rust tokenizer exposing a C ABI `rust_tokenize_word_count`.
-- `model_blob.rs` — small Rust byte array (`MODEL_BLOB`) simulating an embedded model.
-- `model.bin` — textual placeholder representing a compact binary payload.
+- `nlp.rs` - simple Rust tokenizer exposing a C ABI `rust_tokenize_word_count`.
+- `model_blob.rs` - small Rust byte array (`MODEL_BLOB`) simulating an embedded model.
+- `model.bin` - textual placeholder representing a compact binary payload.
 
 Notes:
 - These files are provided as source/text artifacts only. Use them as references or copy them
